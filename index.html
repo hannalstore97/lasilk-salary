@@ -3,664 +3,771 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tính Lương · Hannalstore97</title>
+<title>Chấm Công · Hannalstore97</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --mocha:#2A211C;
-  --brown:#5B4636;
-  --terra:#BE735E;
-  --sand:#DCC6AA;
-  --cream:#F7F3EB;
-  --nude:#EDE4D8;
-  --white:#FDFCFA;
+  --mocha:#2A211C;--brown:#5B4636;--terra:#BE735E;
+  --sand:#DCC6AA;--cream:#F7F3EB;--nude:#EDE4D8;--white:#FDFCFA;
 }
-html{scroll-behavior:smooth;font-size:15px;}
+html{scroll-behavior:smooth;}
 body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--mocha);min-height:100vh;}
 
-/* TOPBAR */
-.topbar{background:var(--mocha);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(220,198,170,.12);}
-.brand{display:flex;align-items:center;gap:10px;}
-.brand-logo{width:32px;height:32px;background:var(--terra);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:#fff;letter-spacing:-1px;}
-.brand-name{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;color:var(--sand);}
-.topbar-month{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(220,198,170,.5);}
+/* ── TOPBAR ── */
+.topbar{background:var(--mocha);height:54px;display:flex;align-items:center;padding:0 1.25rem;gap:10px;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(220,198,170,.1);}
+.t-logo{width:30px;height:30px;background:var(--terra);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;}
+.t-name{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;color:var(--sand);}
+.t-mode{margin-left:auto;display:flex;gap:4px;background:rgba(255,255,255,.07);border-radius:20px;padding:3px;}
+.t-mode button{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;padding:5px 14px;border-radius:16px;border:none;cursor:pointer;background:transparent;color:rgba(220,198,170,.5);transition:all .2s;}
+.t-mode button.on{background:var(--terra);color:#fff;}
 
-/* LAYOUT */
-.container{max-width:900px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+/* ── LAYOUT ── */
+.page{display:none;max-width:520px;margin:0 auto;padding:1.5rem 1rem 5rem;}
+.page.show{display:block;}
 
-/* SECTION TITLE */
-.sec-title{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:3px;color:var(--terra);text-transform:uppercase;margin-bottom:.75rem;}
+/* ── SECTION HEAD ── */
+.sec{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:3px;color:var(--terra);text-transform:uppercase;margin-bottom:.6rem;}
 
-/* EMPLOYEE CARDS */
-.emp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
-.emp-card{background:var(--white);border:1.5px solid transparent;border-radius:14px;padding:1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
-.emp-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--nude);}
-.emp-card.active{border-color:var(--terra);background:#fff;}
-.emp-card.active::before{background:var(--terra);}
-.emp-card:hover{border-color:var(--sand);}
-.emp-avatar{width:40px;height:40px;border-radius:50%;background:var(--nude);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--brown);margin-bottom:.75rem;transition:background .2s;}
-.emp-card.active .emp-avatar{background:var(--terra);color:#fff;}
-.emp-name{font-size:13px;font-weight:600;color:var(--mocha);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.emp-wage{font-size:11px;color:rgba(42,33,28,.45);margin-top:2px;}
-.emp-total{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--terra);margin-top:.5rem;}
-.emp-total-label{font-size:10px;color:rgba(42,33,28,.35);}
-.add-emp{background:transparent;border:1.5px dashed var(--sand);border-radius:14px;padding:1.25rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;transition:all .2s;min-height:130px;}
-.add-emp:hover{border-color:var(--terra);background:rgba(190,115,94,.04);}
-.add-emp-icon{font-size:22px;color:var(--sand);}
-.add-emp-text{font-size:11px;color:rgba(42,33,28,.35);font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:1px;}
+/* ── CARDS ── */
+.card{background:var(--white);border-radius:14px;border:1px solid rgba(42,33,28,.07);overflow:hidden;margin-bottom:1rem;}
+.card-head{background:var(--mocha);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+.card-head-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:var(--cream);letter-spacing:.3px;}
+.card-head-sub{font-size:11px;color:rgba(220,198,170,.45);}
+.card-body{padding:14px 16px;}
+.card-footer{padding:10px 16px;border-top:1px solid var(--nude);}
 
-/* PANEL */
-.panel{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid rgba(42,33,28,.07);margin-bottom:1.5rem;}
-.panel-header{background:var(--mocha);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.panel-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:var(--cream);letter-spacing:.5px;}
-.panel-sub{font-size:11px;color:rgba(220,198,170,.5);margin-top:2px;}
-.panel-body{padding:1.5rem;}
+/* ── FORM ── */
+.f-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:rgba(42,33,28,.45);margin-bottom:5px;}
+.f-input{width:100%;padding:10px 12px;border:1px solid var(--nude);border-radius:9px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--mocha);background:var(--cream);outline:none;transition:border-color .2s;}
+.f-input:focus{border-color:var(--terra);}
+.f-input::placeholder{color:rgba(42,33,28,.3);}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.f-group{margin-bottom:12px;}
+.f-group:last-child{margin-bottom:0;}
 
-/* FORM */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.form-group{display:flex;flex-direction:column;gap:6px;}
-.form-group label{font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.5px;color:rgba(42,33,28,.55);text-transform:uppercase;}
-.form-group input,.form-group select{padding:10px 14px;border:1px solid var(--nude);border-radius:9px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--mocha);background:var(--cream);transition:border-color .2s;outline:none;width:100%;}
-.form-group input:focus,.form-group select:focus{border-color:var(--terra);}
-.form-group input::placeholder{color:rgba(42,33,28,.3);}
+/* ── LUNCH TOGGLE ── */
+.lunch-box{background:var(--cream);border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--nude);cursor:pointer;transition:border-color .2s;}
+.lunch-box.on{border-color:var(--terra);background:rgba(190,115,94,.06);}
+.lunch-left{display:flex;align-items:center;gap:8px;}
+.lunch-icon{width:28px;height:28px;border-radius:7px;background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:14px;transition:background .2s;}
+.lunch-box.on .lunch-icon{background:var(--terra);}
+.lunch-text{font-size:13px;color:var(--mocha);}
+.lunch-sub{font-size:11px;color:rgba(42,33,28,.4);}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--nude);position:relative;transition:background .2s;flex-shrink:0;}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;}
+.lunch-box.on .toggle{background:var(--terra);}
+.lunch-box.on .toggle::after{left:19px;}
 
-/* SHIFTS TABLE */
-.shifts-header{display:grid;grid-template-columns:1fr 95px 95px 70px 70px 90px 40px;gap:8px;padding:8px 14px;background:var(--cream);border-radius:8px;margin-bottom:6px;}
-.shifts-header span{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(42,33,28,.4);}
-.shift-row-item{display:grid;grid-template-columns:1fr 95px 95px 70px 70px 90px 40px;gap:8px;align-items:center;padding:8px 14px;background:var(--cream);border-radius:9px;margin-bottom:5px;border:1px solid rgba(42,33,28,.05);transition:background .2s;}
-.lunch-toggle{display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;user-select:none;}
-.lunch-toggle input[type=checkbox]{width:15px;height:15px;accent-color:var(--terra);cursor:pointer;flex-shrink:0;}
-.lunch-toggle span{font-size:11px;color:var(--brown);font-family:'Montserrat',sans-serif;font-weight:700;}
-.shift-row-item:hover{background:var(--nude);}
-.shift-row-item input{padding:6px 10px;border:1px solid var(--nude);border-radius:7px;font-size:12px;font-family:'Poppins',sans-serif;color:var(--mocha);background:#fff;outline:none;width:100%;}
-.shift-row-item input:focus{border-color:var(--terra);}
-.shift-row-item select{padding:6px 8px;border:1px solid var(--nude);border-radius:7px;font-size:11px;font-family:'Poppins',sans-serif;color:var(--mocha);background:#fff;outline:none;width:100%;cursor:pointer;}
-.hours-badge{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--brown);text-align:center;}
-.btn-del{width:28px;height:28px;background:transparent;border:1px solid var(--nude);border-radius:6px;cursor:pointer;color:rgba(42,33,28,.35);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;margin:0 auto;}
-.btn-del:hover{background:#FEE;border-color:#fcc;color:#c00;}
+/* ── HOURS DISPLAY ── */
+.hours-pill{background:var(--mocha);border-radius:9px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+.hp-label{font-size:11px;color:rgba(220,198,170,.5);}
+.hp-val{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:var(--terra);}
+.hp-unit{font-size:11px;color:rgba(220,198,170,.4);}
 
-/* BUTTONS */
-.btn-add-shift{background:transparent;border:1.5px dashed var(--sand);border-radius:9px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(42,33,28,.4);cursor:pointer;width:100%;transition:all .2s;margin-top:8px;}
-.btn-add-shift:hover{border-color:var(--terra);color:var(--terra);}
-.btn-calc{background:var(--mocha);color:var(--sand);border:none;border-radius:10px;padding:12px 28px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;cursor:pointer;transition:background .2s;}
-.btn-calc:hover{background:var(--brown);}
-.btn-row{display:flex;justify-content:flex-end;padding-top:1rem;gap:.75rem;}
-.btn-secondary{background:transparent;color:var(--brown);border:1.5px solid var(--sand);border-radius:10px;padding:11px 24px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;}
-.btn-secondary:hover{border-color:var(--brown);}
+/* ── BUTTONS ── */
+.btn-main{width:100%;background:var(--mocha);color:var(--sand);border:none;border-radius:10px;padding:13px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;cursor:pointer;transition:background .2s;}
+.btn-main:hover{background:var(--brown);}
+.btn-main:disabled{background:var(--nude);color:rgba(42,33,28,.3);cursor:not-allowed;}
+.btn-terra{background:var(--terra);color:#fff;}
+.btn-terra:hover{background:#a5604e;}
+.btn-sm{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:16px;border:1px solid var(--sand);background:transparent;color:var(--brown);cursor:pointer;transition:all .2s;}
+.btn-sm:hover{border-color:var(--terra);color:var(--terra);}
+.btn-sm.danger:hover{border-color:#c00;color:#c00;}
 
-/* RESULTS */
-.result-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem;}
-.result-card{background:var(--cream);border-radius:11px;padding:1rem 1.1rem;border:1px solid rgba(42,33,28,.06);}
-.result-card.highlight{background:var(--mocha);}
-.result-card .r-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(42,33,28,.4);text-transform:uppercase;margin-bottom:.4rem;}
-.result-card.highlight .r-label{color:rgba(220,198,170,.5);}
-.result-card .r-val{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:var(--mocha);}
-.result-card.highlight .r-val{color:var(--terra);}
-.result-card .r-unit{font-size:10px;color:rgba(42,33,28,.35);margin-top:1px;}
-.result-card.highlight .r-unit{color:rgba(220,198,170,.4);}
+/* ── EMPLOYEE SELECT ── */
+.emp-list{display:flex;flex-direction:column;gap:6px;}
+.emp-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;border:1.5px solid transparent;background:var(--cream);cursor:pointer;transition:all .2s;}
+.emp-opt:hover{border-color:var(--sand);}
+.emp-opt.sel{border-color:var(--terra);background:rgba(190,115,94,.06);}
+.emp-avatar{width:36px;height:36px;border-radius:50%;background:var(--nude);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:var(--brown);flex-shrink:0;transition:background .2s;}
+.emp-opt.sel .emp-avatar{background:var(--terra);color:#fff;}
+.emp-opt-name{font-size:13px;font-weight:600;color:var(--mocha);}
+.emp-opt-wage{font-size:11px;color:rgba(42,33,28,.4);}
+.emp-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--sand);margin-left:auto;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.emp-opt.sel .emp-check{background:var(--terra);border-color:var(--terra);}
+.emp-check-dot{width:8px;height:8px;border-radius:50%;background:#fff;display:none;}
+.emp-opt.sel .emp-check-dot{display:block;}
 
-/* BREAKDOWN TABLE */
-.breakdown{width:100%;border-collapse:collapse;font-size:12.5px;}
-.breakdown thead th{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(42,33,28,.4);text-align:left;padding:8px 12px;border-bottom:1.5px solid var(--nude);}
-.breakdown tbody td{padding:9px 12px;border-bottom:1px solid rgba(42,33,28,.05);color:var(--mocha);}
-.breakdown tbody tr:last-child td{border-bottom:none;}
-.breakdown tbody tr:hover td{background:var(--cream);}
-.breakdown .td-num{font-family:'Montserrat',sans-serif;font-weight:700;text-align:right;}
-.td-type{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-family:'Montserrat',sans-serif;font-weight:700;}
-.type-normal{background:rgba(220,198,170,.2);color:var(--brown);}
-.type-ot{background:rgba(190,115,94,.12);color:var(--terra);}
-.type-weekend{background:rgba(91,70,54,.1);color:var(--brown);}
+/* ── SHIFT HISTORY ── */
+.shift-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--nude);}
+.shift-item:last-child{border-bottom:none;}
+.si-date{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--mocha);}
+.si-time{font-size:11px;color:rgba(42,33,28,.4);margin-top:1px;}
+.si-right{text-align:right;}
+.si-hrs{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;}
+.si-earn{font-size:10px;color:rgba(42,33,28,.4);margin-top:1px;}
+.tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:10px;}
+.tag-normal{background:rgba(220,198,170,.3);color:var(--brown);}
+.tag-ot{background:rgba(190,115,94,.15);color:var(--terra);}
+.tag-wk{background:rgba(91,70,54,.12);color:var(--brown);}
 
-/* SUMMARY ALL */
-.summary-all{background:var(--white);border-radius:16px;border:1px solid rgba(42,33,28,.07);overflow:hidden;}
-.summary-all-header{background:var(--mocha);padding:1rem 1.5rem;}
-.summary-table{width:100%;border-collapse:collapse;}
-.summary-table thead th{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(220,198,170,.5);text-align:left;padding:12px 16px;border-bottom:1px solid rgba(220,198,170,.08);}
-.summary-table tbody td{padding:13px 16px;border-bottom:1px solid rgba(42,33,28,.05);font-size:13px;}
-.summary-table tbody tr:last-child td{border-bottom:none;}
-.summary-table tbody tr:hover td{background:var(--cream);}
-.emp-chip{display:inline-flex;align-items:center;gap:7px;}
-.chip-avatar{width:28px;height:28px;border-radius:50%;background:var(--nude);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;color:var(--brown);}
-.chip-name{font-weight:500;font-size:13px;}
-.total-grand{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--terra);font-size:14px;}
+/* ── STAT STRIP ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.stat-box{background:var(--white);border-radius:10px;padding:10px;border:1px solid rgba(42,33,28,.06);text-align:center;}
+.stat-n{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:var(--mocha);}
+.stat-n.accent{color:var(--terra);}
+.stat-l{font-size:10px;color:rgba(42,33,28,.4);margin-top:2px;}
 
-/* MONTH SELECTOR */
-.month-bar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;}
-.month-input{padding:8px 14px;border:1px solid var(--nude);border-radius:9px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--mocha);background:var(--cream);outline:none;cursor:pointer;}
-.month-input:focus{border-color:var(--terra);}
-.month-bar-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(42,33,28,.35);text-transform:uppercase;}
+/* ── MANAGER EMP ROW ── */
+.m-emp-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--nude);cursor:pointer;transition:background .2s;}
+.m-emp-row:last-child{border-bottom:none;}
+.m-emp-row:hover{background:var(--cream);}
+.m-emp-info{flex:1;min-width:0;}
+.m-emp-name{font-size:13px;font-weight:600;color:var(--mocha);}
+.m-emp-meta{font-size:11px;color:rgba(42,33,28,.4);margin-top:1px;}
+.m-emp-right{text-align:right;flex-shrink:0;}
+.m-emp-total{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:var(--terra);}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dot-ok{background:#1D9E75;}
+.dot-warn{background:#EF9F27;}
 
-/* PRINT AREA */
-.print-btn{background:transparent;border:1.5px solid var(--sand);border-radius:10px;padding:10px 20px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;color:var(--brown);display:flex;align-items:center;gap:6px;transition:all .2s;}
-.print-btn:hover{border-color:var(--terra);color:var(--terra);}
+/* ── DETAIL BREAKDOWN ── */
+.breakdown-row{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--nude);font-size:12.5px;}
+.breakdown-row:last-child{border-bottom:none;}
+.br-left{color:var(--mocha);}
+.br-date{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;margin-bottom:2px;}
+.br-info{font-size:11px;color:rgba(42,33,28,.4);}
+.br-right{text-align:right;}
+.br-amt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--brown);}
 
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:3rem 1rem;color:rgba(42,33,28,.3);}
-.empty-state .empty-icon{font-size:36px;margin-bottom:.75rem;}
-.empty-state p{font-size:13px;}
+/* ── TOTAL FOOTER ── */
+.total-foot{background:var(--mocha);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.tf-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(220,198,170,.5);}
+.tf-val{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--terra);}
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--mocha);color:var(--sand);padding:.75rem 1.25rem;border-radius:10px;font-size:13px;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.5px;transform:translateY(80px);opacity:0;transition:all .3s;z-index:200;}
-.toast.show{transform:translateY(0);opacity:1;}
+/* ── MONTH BAR ── */
+.month-bar{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.month-in{padding:8px 12px;border:1px solid var(--nude);border-radius:9px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--mocha);background:var(--cream);outline:none;cursor:pointer;}
+.month-in:focus{border-color:var(--terra);}
 
-/* TAB NAV */
-.tab-nav{display:flex;gap:4px;background:var(--nude);border-radius:12px;padding:4px;margin-bottom:1.5rem;}
-.tab-btn{flex:1;padding:9px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;border:none;background:transparent;color:rgba(42,33,28,.45);cursor:pointer;border-radius:9px;transition:all .2s;}
-.tab-btn.active{background:var(--white);color:var(--mocha);box-shadow:0 1px 4px rgba(42,33,28,.08);}
+/* ── SUCCESS STATE ── */
+.success-box{background:rgba(29,158,117,.08);border:1px solid rgba(29,158,117,.25);border-radius:12px;padding:16px;text-align:center;margin-bottom:1rem;}
+.success-icon{font-size:28px;margin-bottom:6px;}
+.success-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:#0F6E56;}
+.success-sub{font-size:12px;color:rgba(15,110,86,.7);margin-top:3px;}
 
-/* DIVIDER */
-.divider{height:1px;background:var(--nude);margin:1rem 0;}
+/* ── EMPTY ── */
+.empty{text-align:center;padding:2rem 1rem;color:rgba(42,33,28,.3);}
+.empty-icon{font-size:32px;margin-bottom:.5rem;}
+.empty p{font-size:12px;}
 
-@media(max-width:600px){
-  .emp-grid{grid-template-columns:1fr 1fr;}
-  .result-strip{grid-template-columns:1fr 1fr;}
-  .form-grid{grid-template-columns:1fr;}
-  .shifts-header{display:none;}
-  .shift-row-item{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:6px;}
-  .summary-table .td-hide{display:none;}
-}
-@media print{
-  .topbar,.tab-nav,.btn-row,.btn-add-shift,.btn-del,.print-btn{display:none!important;}
-  body{background:#fff;}
-  .container{padding:0;}
-}
+/* ── MODAL OVERLAY ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(42,33,28,.55);z-index:100;align-items:flex-end;justify-content:center;}
+.overlay.show{display:flex;}
+.modal{background:var(--white);border-radius:20px 20px 0 0;width:100%;max-width:520px;padding:1.25rem 1.25rem 2rem;max-height:90vh;overflow-y:auto;}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--nude);margin:0 auto 1rem;}
+.modal-title{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--mocha);margin-bottom:1rem;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(60px);background:var(--mocha);color:var(--sand);padding:10px 20px;border-radius:20px;font-size:12px;font-family:'Montserrat',sans-serif;font-weight:700;white-space:nowrap;opacity:0;transition:all .3s;z-index:200;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* ── PRINT ── */
+@media print{.topbar,.t-mode,.btn-main,.btn-sm{display:none!important;}body{background:#fff;}}
+@media(max-width:400px){.f-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand">
-    <div class="brand-logo">H</div>
-    <div class="brand-name">HANNALSTORE97</div>
+  <div class="t-logo">H</div>
+  <div class="t-name">HANNALSTORE97</div>
+  <div class="t-mode">
+    <button class="on" onclick="setMode('nv')" id="btn-nv">Nhân viên</button>
+    <button onclick="setMode('ql')" id="btn-ql">Quản lý</button>
   </div>
-  <div class="topbar-month" id="topbar-month-display"></div>
 </div>
 
-<div class="container">
+<!-- ══════════════════════════════
+     PAGE: NHÂN VIÊN
+══════════════════════════════ -->
+<div class="page show" id="page-nv">
 
-  <!-- TAB NAV -->
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('nhap')">✦ Nhập ca làm</button>
-    <button class="tab-btn" onclick="switchTab('tong')">✦ Tổng hợp tháng</button>
+  <!-- CHỌN NHÂN VIÊN -->
+  <div style="margin-bottom:1.25rem">
+    <div class="sec">Bạn là ai?</div>
+    <div class="emp-list" id="nv-emp-list"></div>
   </div>
 
-  <!-- TAB NHẬP CA -->
-  <div id="tab-nhap">
-
-    <!-- MONTH -->
-    <div class="month-bar">
-      <span class="month-bar-label">Tháng</span>
-      <input type="month" class="month-input" id="month-input">
-    </div>
-
-    <!-- EMPLOYEE SELECTOR -->
-    <div class="sec-title">Chọn nhân viên</div>
-    <div class="emp-grid" id="emp-grid">
-      <!-- populated by JS -->
-      <button class="add-emp" onclick="addEmployee()">
-        <div class="add-emp-icon">+</div>
-        <div class="add-emp-text">Thêm nhân viên</div>
-      </button>
-    </div>
-
-    <!-- EMPLOYEE SETUP -->
-    <div class="panel" id="setup-panel">
-      <div class="panel-header">
+  <!-- FORM ĐIỀN CA -->
+  <div id="nv-form-wrap" style="display:none">
+    <div class="sec">Điền ca hôm nay</div>
+    <div class="card">
+      <div class="card-head">
         <div>
-          <div class="panel-title" id="panel-emp-name">— Chọn nhân viên —</div>
-          <div class="panel-sub">Cài lương giờ & phụ cấp</div>
+          <div class="card-head-title" id="nv-form-name">—</div>
+          <div class="card-head-sub" id="nv-form-date">—</div>
         </div>
       </div>
-      <div class="panel-body">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Tên nhân viên</label>
-            <input type="text" id="inp-name" placeholder="VD: Nguyễn Thị Mai" oninput="updateCurrentName()">
-          </div>
-          <div class="form-group">
-            <label>Lương giờ (VNĐ)</label>
-            <input type="number" id="inp-wage" placeholder="25000" min="0" step="1000" oninput="updateCurrentWage()">
-          </div>
-        </div>
-        <div class="form-grid" style="margin-top:.75rem">
-          <div class="form-group">
-            <label>Phụ cấp gửi xe / buổi (VNĐ)</label>
-            <input type="number" id="inp-parking" placeholder="5000" min="0" step="1000" value="5000" oninput="updateCurrentParking()">
-          </div>
-          <div class="form-group">
-            <label>Ghi chú</label>
-            <input type="text" id="inp-note" placeholder="VD: Sale mới, thử việc..." oninput="updateCurrentNote()">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SHIFTS INPUT -->
-    <div class="panel" id="shifts-panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Ca làm việc</div>
-          <div class="panel-sub">Nhập từng buổi làm trong tháng</div>
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="shifts-header">
-          <span>Ngày</span>
-          <span>Giờ vào</span>
-          <span>Giờ ra</span>
-          <span>Số giờ</span>
-          <span>Nghỉ trưa</span>
-          <span>Loại buổi</span>
-          <span></span>
-        </div>
-        <div id="shifts-list"></div>
-        <button class="btn-add-shift" onclick="addShift()">+ Thêm ca làm</button>
-        <div class="btn-row">
-          <button class="btn-secondary" onclick="clearShifts()">Xoá trắng</button>
-          <button class="btn-calc" onclick="calculate()">Tính lương →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESULTS -->
-    <div id="results-section" style="display:none">
-      <div class="panel">
-        <div class="panel-header">
+      <div class="card-body">
+        <div class="f-row">
           <div>
-            <div class="panel-title" id="result-emp-label">Kết quả lương</div>
-            <div class="panel-sub" id="result-month-label">—</div>
+            <div class="f-label">Giờ vào</div>
+            <input type="time" class="f-input" id="nv-in" value="08:00" oninput="nvRefreshHours()">
           </div>
-          <button class="print-btn" onclick="window.print()">🖨 In phiếu</button>
+          <div>
+            <div class="f-label">Giờ ra</div>
+            <input type="time" class="f-input" id="nv-out" value="17:00" oninput="nvRefreshHours()">
+          </div>
         </div>
-        <div class="panel-body">
-          <div class="result-strip">
-            <div class="result-card">
-              <div class="r-label">Số buổi</div>
-              <div class="r-val" id="res-sessions">0</div>
-              <div class="r-unit">buổi làm</div>
-            </div>
-            <div class="result-card">
-              <div class="r-label">Tổng giờ</div>
-              <div class="r-val" id="res-hours">0</div>
-              <div class="r-unit">giờ</div>
-            </div>
-            <div class="result-card">
-              <div class="r-label">Phụ cấp xe</div>
-              <div class="r-val" id="res-parking">0</div>
-              <div class="r-unit">VNĐ</div>
-            </div>
-            <div class="result-card highlight">
-              <div class="r-label">Thực nhận</div>
-              <div class="r-val" id="res-total">0</div>
-              <div class="r-unit">VNĐ</div>
+        <div class="f-group">
+          <div class="f-label">Loại ca</div>
+          <select class="f-input" id="nv-type" onchange="nvRefreshHours()">
+            <option value="normal">Thường</option>
+            <option value="ot">OT × 1.5</option>
+            <option value="weekend">Cuối tuần × 2</option>
+          </select>
+        </div>
+        <div class="lunch-box on" id="nv-lunch-box" onclick="nvToggleLunch()">
+          <div class="lunch-left">
+            <div class="lunch-icon">🍱</div>
+            <div>
+              <div class="lunch-text">Nghỉ trưa 1 tiếng</div>
+              <div class="lunch-sub">Tự động trừ 1 giờ</div>
             </div>
           </div>
-
-          <!-- BREAKDOWN -->
-          <div class="sec-title" style="margin-top:.5rem">Chi tiết từng ca</div>
-          <table class="breakdown">
-            <thead>
-              <tr>
-                <th>Ngày</th>
-                <th>Giờ</th>
-                <th class="td-hide">Loại</th>
-                <th style="text-align:right">Lương giờ</th>
-                <th style="text-align:right">Thành tiền</th>
-              </tr>
-            </thead>
-            <tbody id="breakdown-body"></tbody>
-            <tfoot>
-              <tr style="border-top:2px solid var(--nude);">
-                <td colspan="3" style="padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(42,33,28,.4)">TỔNG LƯƠNG GIỜ</td>
-                <td></td>
-                <td class="td-num" style="padding:10px 12px;font-size:15px;color:var(--brown);" id="total-base">0 đ</td>
-              </tr>
-              <tr>
-                <td colspan="3" style="padding:4px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(42,33,28,.4)">PHỤ CẤP GỬI XE</td>
-                <td></td>
-                <td class="td-num" style="padding:4px 12px;color:var(--brown);" id="total-parking2">0 đ</td>
-              </tr>
-              <tr style="background:var(--cream);">
-                <td colspan="3" style="padding:12px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:var(--mocha)">TỔNG THỰC NHẬN</td>
-                <td></td>
-                <td class="td-num" style="padding:12px;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:900;color:var(--terra);" id="total-grand2">0 đ</td>
-              </tr>
-            </tfoot>
-          </table>
+          <div class="toggle" id="nv-toggle"></div>
         </div>
+        <div class="hours-pill">
+          <div>
+            <div class="hp-label">Số giờ tính lương</div>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:4px">
+            <div class="hp-val" id="nv-hours-display">8</div>
+            <div class="hp-unit">giờ</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn-main btn-terra" onclick="nvSaveShift()">Lưu ca hôm nay</button>
       </div>
     </div>
 
-  </div><!-- /tab-nhap -->
-
-  <!-- TAB TỔNG HỢP -->
-  <div id="tab-tong" style="display:none">
-    <div class="month-bar">
-      <span class="month-bar-label">Tháng</span>
-      <input type="month" class="month-input" id="month-input-tong" onchange="syncMonth()">
-      <button class="print-btn" onclick="window.print()" style="margin-left:auto">🖨 In tổng hợp</button>
+    <!-- LỊCH SỬ -->
+    <div class="sec">Lịch sử ca làm — tháng này</div>
+    <div class="stats" id="nv-stats">
+      <div class="stat-box"><div class="stat-n" id="nv-s-sessions">0</div><div class="stat-l">buổi làm</div></div>
+      <div class="stat-box"><div class="stat-n" id="nv-s-hours">0</div><div class="stat-l">tổng giờ</div></div>
+      <div class="stat-box"><div class="stat-n accent" id="nv-s-total">0</div><div class="stat-l">dự kiến (đ)</div></div>
     </div>
-
-    <div class="summary-all">
-      <div class="summary-all-header">
-        <div class="panel-title">Bảng lương tổng hợp · <span id="summary-month-label">—</span></div>
-        <div class="panel-sub" style="color:rgba(220,198,170,.5);font-size:11px;margin-top:3px">Hannalstore97 · Nhân viên Part-time</div>
-      </div>
-      <div id="summary-body-wrap" style="overflow-x:auto;">
-        <table class="summary-table">
-          <thead>
-            <tr>
-              <th>Nhân viên</th>
-              <th class="td-hide">Lương giờ</th>
-              <th>Số buổi</th>
-              <th>Tổng giờ</th>
-              <th>Lương giờ</th>
-              <th>Phụ cấp xe</th>
-              <th>Thực nhận</th>
-            </tr>
-          </thead>
-          <tbody id="summary-tbody"></tbody>
-          <tfoot id="summary-tfoot"></tfoot>
-        </table>
-        <div id="summary-empty" class="empty-state" style="display:none">
-          <div class="empty-icon">📋</div>
-          <p>Chưa có dữ liệu. Nhập ca làm ở tab bên kia trước nha!</p>
-        </div>
-      </div>
+    <div class="card">
+      <div id="nv-history-list"><div class="empty"><div class="empty-icon">📅</div><p>Chưa có ca nào tháng này</p></div></div>
     </div>
   </div>
 
-</div><!-- /container -->
+</div><!-- /page-nv -->
+
+<!-- ══════════════════════════════
+     PAGE: QUẢN LÝ
+══════════════════════════════ -->
+<div class="page" id="page-ql">
+
+  <div class="month-bar">
+    <div class="f-label" style="margin:0;white-space:nowrap">Tháng</div>
+    <input type="month" class="month-in" id="ql-month" onchange="qlRender()">
+    <button class="btn-sm" onclick="window.print()" style="margin-left:auto">🖨 In</button>
+  </div>
+
+  <!-- TỔNG QUAN -->
+  <div class="sec">Tổng quan</div>
+  <div class="stats">
+    <div class="stat-box"><div class="stat-n" id="ql-s-emp">3</div><div class="stat-l">nhân viên</div></div>
+    <div class="stat-box"><div class="stat-n" id="ql-s-shifts">0</div><div class="stat-l">ca đã điền</div></div>
+    <div class="stat-box"><div class="stat-n accent" id="ql-s-total">0đ</div><div class="stat-l">tổng lương</div></div>
+  </div>
+
+  <!-- DANH SÁCH NHÂN VIÊN -->
+  <div class="sec">Nhân viên</div>
+  <div class="card" style="margin-bottom:1rem">
+    <div id="ql-emp-list"></div>
+    <div style="padding:12px 16px;border-top:1px solid var(--nude)">
+      <button class="btn-main" onclick="qlCalcAll()">Tính lương tất cả →</button>
+    </div>
+  </div>
+
+  <!-- CÀI ĐẶT NHÂN VIÊN -->
+  <div class="sec">Cài đặt nhân viên</div>
+  <div class="card">
+    <div class="card-head"><div class="card-head-title">Thêm / chỉnh nhân viên</div></div>
+    <div class="card-body" id="ql-emp-settings"></div>
+    <div class="card-footer" style="display:flex;gap:8px">
+      <button class="btn-main" style="flex:1" onclick="qlSaveSettings()">Lưu cài đặt</button>
+      <button class="btn-sm" onclick="qlAddEmpField()">+ Thêm</button>
+    </div>
+  </div>
+
+</div><!-- /page-ql -->
+
+<!-- ══════════════════════════════
+     MODAL: KẾT QUẢ LƯƠNG
+══════════════════════════════ -->
+<div class="overlay" id="overlay-result" onclick="closeResult(event)">
+  <div class="modal" id="modal-result">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modal-title">Phiếu lương</div>
+    <div id="modal-body"></div>
+    <button class="btn-main" style="margin-top:1rem" onclick="closeOverlay('overlay-result')">Đóng</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     MODAL: CHỈNH CA
+══════════════════════════════ -->
+<div class="overlay" id="overlay-edit" onclick="closeResult(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Chỉnh ca làm việc</div>
+    <input type="hidden" id="edit-emp-idx">
+    <input type="hidden" id="edit-shift-idx">
+    <div class="f-row">
+      <div><div class="f-label">Giờ vào</div><input type="time" class="f-input" id="edit-in" oninput="editRefresh()"></div>
+      <div><div class="f-label">Giờ ra</div><input type="time" class="f-input" id="edit-out" oninput="editRefresh()"></div>
+    </div>
+    <div class="f-group">
+      <div class="f-label">Loại ca</div>
+      <select class="f-input" id="edit-type" onchange="editRefresh()">
+        <option value="normal">Thường</option>
+        <option value="ot">OT × 1.5</option>
+        <option value="weekend">Cuối tuần × 2</option>
+      </select>
+    </div>
+    <div class="lunch-box" id="edit-lunch-box" onclick="editToggleLunch()" style="margin-bottom:10px">
+      <div class="lunch-left">
+        <div class="lunch-icon">🍱</div>
+        <div><div class="lunch-text">Nghỉ trưa 1 tiếng</div><div class="lunch-sub">Tự động trừ 1 giờ</div></div>
+      </div>
+      <div class="toggle" id="edit-toggle"></div>
+    </div>
+    <div class="hours-pill" style="margin-bottom:1rem">
+      <div class="hp-label">Số giờ tính lương</div>
+      <div style="display:flex;align-items:baseline;gap:4px"><div class="hp-val" id="edit-hours">0</div><div class="hp-unit">giờ</div></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-main" style="flex:1" onclick="editSave()">Lưu chỉnh sửa</button>
+      <button class="btn-sm danger" onclick="editDelete()">Xoá ca</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── STATE ───
-const MONTHS_VI = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+// ══════════════════════════════
+//  DATA
+// ══════════════════════════════
 const DAYS_VI = ['CN','T2','T3','T4','T5','T6','T7'];
+const MONTHS_VI = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
 
-let state = {
-  currentMonth: '',
-  currentEmpIdx: 0,
+let db = {
   employees: [
-    {name:'Nhân viên 1', wage:25000, parking:5000, note:'', shifts:[]},
-    {name:'Nhân viên 2', wage:25000, parking:5000, note:'', shifts:[]},
-    {name:'Nhân viên 3', wage:25000, parking:5000, note:'', shifts:[]},
-  ]
+    {name:'Nhân viên 1', wage:25000, parking:5000},
+    {name:'Nhân viên 2', wage:25000, parking:5000},
+    {name:'Nhân viên 3', wage:25000, parking:5000},
+  ],
+  shifts: []
 };
 
+function save(){localStorage.setItem('hanna_db', JSON.stringify(db));}
+function load(){
+  try{
+    const raw = localStorage.getItem('hanna_db');
+    if(raw) db = JSON.parse(raw);
+  }catch(e){}
+}
+
+// ══════════════════════════════
+//  UTILS
+// ══════════════════════════════
 function fmt(n){return Math.round(n).toLocaleString('vi-VN');}
-function initMonth(){
-  const now = new Date();
-  const m = now.toISOString().slice(0,7);
-  state.currentMonth = m;
-  document.getElementById('month-input').value = m;
-  document.getElementById('month-input-tong').value = m;
-  updateMonthDisplay();
-}
-function updateMonthDisplay(){
-  const m = state.currentMonth;
-  if(!m) return;
-  const [y,mo] = m.split('-');
-  const label = MONTHS_VI[parseInt(mo)-1]+' '+y;
-  document.getElementById('topbar-month-display').textContent = label;
-  document.getElementById('summary-month-label').textContent = label;
-}
-document.getElementById('month-input').addEventListener('change',function(){
-  state.currentMonth = this.value;
-  document.getElementById('month-input-tong').value = this.value;
-  updateMonthDisplay();
-});
-function syncMonth(){
-  state.currentMonth = document.getElementById('month-input-tong').value;
-  document.getElementById('month-input').value = state.currentMonth;
-  updateMonthDisplay();
-  renderSummary();
-}
-
-// ─── TABS ───
-function switchTab(t){
-  document.getElementById('tab-nhap').style.display = t==='nhap'?'block':'none';
-  document.getElementById('tab-tong').style.display = t==='tong'?'block':'none';
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(t==='nhap'&&i===0)||(t==='tong'&&i===1)));
-  if(t==='tong') renderSummary();
-}
-
-// ─── EMPLOYEES ───
-function renderEmpGrid(){
-  const grid = document.getElementById('emp-grid');
-  grid.innerHTML = '';
-  state.employees.forEach((emp,i)=>{
-    const total = calcTotal(emp);
-    const initials = emp.name.trim() ? emp.name.trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase() : '?';
-    const card = document.createElement('div');
-    card.className = 'emp-card'+(i===state.currentEmpIdx?' active':'');
-    card.innerHTML = `
-      <div class="emp-avatar">${initials}</div>
-      <div class="emp-name">${emp.name||'Chưa đặt tên'}</div>
-      <div class="emp-wage">${fmt(emp.wage)} đ/giờ</div>
-      <div class="emp-total">${fmt(total.grand)}<span style="font-size:9px;font-weight:400"> đ</span></div>
-      <div class="emp-total-label">Dự kiến tháng này</div>
-    `;
-    card.onclick = ()=>selectEmp(i);
-    grid.appendChild(card);
-  });
-  // add button
-  if(state.employees.length < 6){
-    const addBtn = document.createElement('button');
-    addBtn.className = 'add-emp';
-    addBtn.innerHTML = '<div class="add-emp-icon">+</div><div class="add-emp-text">Thêm nhân viên</div>';
-    addBtn.onclick = addEmployee;
-    grid.appendChild(addBtn);
-  }
-}
-function selectEmp(i){
-  state.currentEmpIdx = i;
-  const emp = state.employees[i];
-  document.getElementById('inp-name').value = emp.name;
-  document.getElementById('inp-wage').value = emp.wage;
-  document.getElementById('inp-parking').value = emp.parking;
-  document.getElementById('inp-note').value = emp.note||'';
-  document.getElementById('panel-emp-name').textContent = emp.name||'Chưa đặt tên';
-  renderShifts();
-  renderEmpGrid();
-  document.getElementById('results-section').style.display = 'none';
-}
-function addEmployee(){
-  if(state.employees.length>=6){showToast('Tối đa 6 nhân viên');return;}
-  state.employees.push({name:'Nhân viên '+(state.employees.length+1),wage:25000,parking:5000,note:'',shifts:[]});
-  selectEmp(state.employees.length-1);
-}
-function updateCurrentName(){
-  const v = document.getElementById('inp-name').value;
-  state.employees[state.currentEmpIdx].name = v;
-  document.getElementById('panel-emp-name').textContent = v||'Chưa đặt tên';
-  renderEmpGrid();
-}
-function updateCurrentWage(){
-  state.employees[state.currentEmpIdx].wage = parseFloat(document.getElementById('inp-wage').value)||0;
-  renderEmpGrid();
-}
-function updateCurrentParking(){
-  state.employees[state.currentEmpIdx].parking = parseFloat(document.getElementById('inp-parking').value)||0;
-}
-function updateCurrentNote(){
-  state.employees[state.currentEmpIdx].note = document.getElementById('inp-note').value;
-}
-
-// ─── SHIFTS ───
-function addShift(){
-  const emp = state.employees[state.currentEmpIdx];
-  emp.shifts.push({date:'', inTime:'08:00', outTime:'17:00', lunch:true, type:'normal'});
-  renderShifts();
-}
-function removeShift(i){
-  state.employees[state.currentEmpIdx].shifts.splice(i,1);
-  renderShifts();
-}
-function clearShifts(){
-  if(!confirm('Xoá hết ca làm của nhân viên này?')) return;
-  state.employees[state.currentEmpIdx].shifts = [];
-  renderShifts();
-  document.getElementById('results-section').style.display='none';
+function fmtShort(n){
+  if(n>=1000000) return (Math.round(n/100000)/10).toFixed(1)+'M';
+  if(n>=1000) return Math.round(n/1000)+'K';
+  return Math.round(n)+'';
 }
 function calcHours(inT,outT,lunch){
   if(!inT||!outT) return 0;
   const [ih,im]=inT.split(':').map(Number);
   const [oh,om]=outT.split(':').map(Number);
-  const mins = (oh*60+om)-(ih*60+im);
-  const raw = Math.max(0, Math.round(mins/60*10)/10);
-  return lunch ? Math.max(0, Math.round((raw-1)*10)/10) : raw;
+  const mins=(oh*60+om)-(ih*60+im);
+  const raw=Math.max(0,Math.round(mins/60*10)/10);
+  return lunch?Math.max(0,Math.round((raw-1)*10)/10):raw;
 }
-function renderShifts(){
-  const emp = state.employees[state.currentEmpIdx];
-  const list = document.getElementById('shifts-list');
-  if(emp.shifts.length===0){
-    list.innerHTML='<div class="empty-state" style="padding:1.5rem"><div class="empty-icon">📅</div><p>Chưa có ca nào. Thêm ca để bắt đầu!</p></div>';
-    return;
-  }
-  list.innerHTML = emp.shifts.map((s,i)=>{
-    const h = calcHours(s.inTime,s.outTime,s.lunch);
-    return `
-    <div class="shift-row-item">
-      <input type="date" value="${s.date}" onchange="state.employees[state.currentEmpIdx].shifts[${i}].date=this.value;renderEmpGrid()">
-      <input type="time" value="${s.inTime}" onchange="state.employees[state.currentEmpIdx].shifts[${i}].inTime=this.value;refreshHour(${i});">
-      <input type="time" value="${s.outTime}" onchange="state.employees[state.currentEmpIdx].shifts[${i}].outTime=this.value;refreshHour(${i});">
-      <div class="hours-badge" id="h-${i}">${h}h</div>
-      <label class="lunch-toggle">
-        <input type="checkbox" ${s.lunch?'checked':''} onchange="state.employees[state.currentEmpIdx].shifts[${i}].lunch=this.checked;refreshHour(${i});">
-        <span>−1h</span>
-      </label>
-      <select onchange="state.employees[state.currentEmpIdx].shifts[${i}].type=this.value;renderEmpGrid()">
-        <option value="normal" ${s.type==='normal'?'selected':''}>Thường</option>
-        <option value="ot" ${s.type==='ot'?'selected':''}>OT ×1.5</option>
-        <option value="weekend" ${s.type==='weekend'?'selected':''}>Cuối tuần ×2</option>
-      </select>
-      <button class="btn-del" onclick="removeShift(${i})">✕</button>
-    </div>`;
-  }).join('');
+function calcEarned(h,wage,type){
+  const mult=type==='ot'?1.5:type==='weekend'?2:1;
+  return h*wage*mult;
 }
-function refreshHour(i){
-  const s = state.employees[state.currentEmpIdx].shifts[i];
-  const h = calcHours(s.inTime, s.outTime, s.lunch);
-  const el = document.getElementById('h-'+i);
-  if(el) el.textContent = h+'h';
-  renderEmpGrid();
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function nowMonth(){return new Date().toISOString().slice(0,7);}
+function dateLabel(d){
+  if(!d) return '—';
+  const dt=new Date(d+'T00:00:00');
+  return DAYS_VI[dt.getDay()]+' '+dt.getDate()+'/'+(dt.getMonth()+1);
 }
-
-// ─── CALCULATE ───
-function calcTotal(emp){
-  let baseWage=0, sessions=0, totalHours=0;
-  emp.shifts.forEach(s=>{
-    const h = calcHours(s.inTime, s.outTime, s.lunch);
+function monthLabel(m){
+  if(!m) return '—';
+  const [y,mo]=m.split('-');
+  return MONTHS_VI[parseInt(mo)-1]+' '+y;
+}
+function shiftsForEmpMonth(empIdx, month){
+  return db.shifts.filter(s=>s.empIdx===empIdx && s.date && s.date.startsWith(month));
+}
+function calcEmpMonth(empIdx, month){
+  const emp=db.employees[empIdx];
+  const shifts=shiftsForEmpMonth(empIdx,month);
+  let sessions=0,totalHours=0,baseWage=0;
+  shifts.forEach(s=>{
+    const h=calcHours(s.inTime,s.outTime,s.lunch);
     if(h<=0) return;
-    sessions++;
-    totalHours += h;
-    const mult = s.type==='ot'?1.5:s.type==='weekend'?2:1;
-    baseWage += h * emp.wage * mult;
+    sessions++;totalHours+=h;
+    baseWage+=calcEarned(h,emp.wage,s.type);
   });
-  const parking = sessions * emp.parking;
-  const grand = baseWage + parking;
-  return {baseWage, parking, grand, sessions, totalHours:Math.round(totalHours*10)/10};
+  const parking=sessions*emp.parking;
+  const grand=baseWage+parking;
+  return {sessions,totalHours:Math.round(totalHours*10)/10,baseWage,parking,grand};
 }
-
-function calculate(){
-  const emp = state.employees[state.currentEmpIdx];
-  if(!emp.name){showToast('Nhập tên nhân viên trước nha!');return;}
-  if(emp.shifts.length===0){showToast('Chưa có ca nào để tính!');return;}
-
-  const t = calcTotal(emp);
-  document.getElementById('results-section').style.display='block';
-
-  const [y,mo] = (state.currentMonth||new Date().toISOString().slice(0,7)).split('-');
-  document.getElementById('result-emp-label').textContent='Lương · '+emp.name;
-  document.getElementById('result-month-label').textContent=MONTHS_VI[parseInt(mo)-1]+' '+y;
-
-  document.getElementById('res-sessions').textContent=t.sessions;
-  document.getElementById('res-hours').textContent=t.totalHours;
-  document.getElementById('res-parking').textContent=fmt(t.parking);
-  document.getElementById('res-total').textContent=fmt(t.grand);
-  document.getElementById('total-base').textContent=fmt(t.baseWage)+' đ';
-  document.getElementById('total-parking2').textContent=fmt(t.parking)+' đ';
-  document.getElementById('total-grand2').textContent=fmt(t.grand)+' đ';
-
-  const tbody = document.getElementById('breakdown-body');
-  const typeMap = {normal:'Thường',ot:'OT ×1.5',weekend:'CuốiTuần ×2'};
-  const classMap = {normal:'type-normal',ot:'type-ot',weekend:'type-weekend'};
-  tbody.innerHTML = emp.shifts.map(s=>{
-    const h = calcHours(s.inTime, s.outTime, s.lunch);
-    if(h<=0) return '';
-    const mult = s.type==='ot'?1.5:s.type==='weekend'?2:1;
-    const earned = h*emp.wage*mult;
-    let dateLabel = s.date;
-    if(s.date){
-      const d = new Date(s.date+'T00:00:00');
-      dateLabel = DAYS_VI[d.getDay()]+' '+d.getDate()+'/'+('0'+(d.getMonth()+1)).slice(-2);
-    }
-    const lunchNote = s.lunch ? ' <span style="font-size:10px;color:var(--terra)">−1h trưa</span>' : '';
-    return `<tr>
-      <td>${dateLabel||'—'}</td>
-      <td>${s.inTime}–${s.outTime}${lunchNote} <span style="color:rgba(42,33,28,.4);font-size:11px">(${h}h)</span></td>
-      <td class="td-hide"><span class="td-type ${classMap[s.type]}">${typeMap[s.type]}</span></td>
-      <td class="td-num">${fmt(emp.wage*(mult===1?1:mult))} đ</td>
-      <td class="td-num">${fmt(earned)} đ</td>
-    </tr>`;
-  }).join('');
-
-  document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
-  renderEmpGrid();
-  showToast('Đã tính xong! ✓');
-}
-
-// ─── SUMMARY ───
-function renderSummary(){
-  const tbody = document.getElementById('summary-tbody');
-  const tfoot = document.getElementById('summary-tfoot');
-  const empty = document.getElementById('summary-empty');
-  const hasData = state.employees.some(e=>e.shifts.length>0);
-  empty.style.display = hasData?'none':'block';
-
-  let grandTotal=0, grandHours=0, grandParking=0, grandBase=0;
-  tbody.innerHTML = state.employees.map(emp=>{
-    const t = calcTotal(emp);
-    grandTotal += t.grand;
-    grandHours += t.totalHours;
-    grandParking += t.parking;
-    grandBase += t.baseWage;
-    const initials = emp.name.trim()?emp.name.trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase():'?';
-    return `<tr>
-      <td><div class="emp-chip"><div class="chip-avatar">${initials}</div><span class="chip-name">${emp.name||'—'}</span></div></td>
-      <td class="td-hide" style="color:rgba(42,33,28,.5)">${fmt(emp.wage)} đ/h</td>
-      <td>${t.sessions} buổi</td>
-      <td>${t.totalHours} giờ</td>
-      <td>${fmt(t.baseWage)} đ</td>
-      <td>${fmt(t.parking)} đ</td>
-      <td class="total-grand">${fmt(t.grand)} đ</td>
-    </tr>`;
-  }).join('');
-
-  tfoot.innerHTML = `<tr style="background:var(--cream);border-top:2px solid var(--nude)">
-    <td colspan="2" style="padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;letter-spacing:1px;color:rgba(42,33,28,.5)">TỔNG CỘNG</td>
-    <td style="padding:13px 16px;font-weight:600">— </td>
-    <td style="padding:13px 16px;font-weight:600">${grandHours}h</td>
-    <td style="padding:13px 16px;font-weight:600">${fmt(grandBase)} đ</td>
-    <td style="padding:13px 16px;font-weight:600">${fmt(grandParking)} đ</td>
-    <td style="padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--terra)">${fmt(grandTotal)} đ</td>
-  </tr>`;
-}
-
-// ─── TOAST ───
 function showToast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function closeOverlay(id){document.getElementById(id).classList.remove('show');}
+function closeResult(e){if(e.target.classList.contains('overlay'))e.target.classList.remove('show');}
+
+// ══════════════════════════════
+//  MODE SWITCH
+// ══════════════════════════════
+function setMode(m){
+  document.getElementById('page-nv').classList.toggle('show',m==='nv');
+  document.getElementById('page-ql').classList.toggle('show',m==='ql');
+  document.getElementById('btn-nv').classList.toggle('on',m==='nv');
+  document.getElementById('btn-ql').classList.toggle('on',m==='ql');
+  if(m==='ql') qlRender();
 }
 
-// ─── INIT ───
-initMonth();
-renderEmpGrid();
-selectEmp(0);
+// ══════════════════════════════
+//  NV: NHÂN VIÊN PAGE
+// ══════════════════════════════
+let nvEmpIdx = null;
+let nvLunch = true;
+
+function nvRenderEmpList(){
+  const list=document.getElementById('nv-emp-list');
+  list.innerHTML=db.employees.map((emp,i)=>{
+    const initials=emp.name.trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()||'?';
+    const sel=nvEmpIdx===i;
+    return `<div class="emp-opt${sel?' sel':''}" onclick="nvSelectEmp(${i})">
+      <div class="emp-avatar">${initials}</div>
+      <div>
+        <div class="emp-opt-name">${emp.name}</div>
+        <div class="emp-opt-wage">${fmt(emp.wage)} đ/giờ · phụ cấp xe ${fmt(emp.parking)} đ/buổi</div>
+      </div>
+      <div class="emp-check"><div class="emp-check-dot"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function nvSelectEmp(i){
+  nvEmpIdx=i;
+  const emp=db.employees[i];
+  document.getElementById('nv-form-wrap').style.display='block';
+  document.getElementById('nv-form-name').textContent=emp.name;
+  const today=new Date();
+  document.getElementById('nv-form-date').textContent=
+    DAYS_VI[today.getDay()]+' '+today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+  nvRenderEmpList();
+  nvRefreshHours();
+  nvRenderHistory();
+}
+
+function nvToggleLunch(){
+  nvLunch=!nvLunch;
+  document.getElementById('nv-lunch-box').classList.toggle('on',nvLunch);
+  nvRefreshHours();
+}
+
+function nvRefreshHours(){
+  const inT=document.getElementById('nv-in').value;
+  const outT=document.getElementById('nv-out').value;
+  const h=calcHours(inT,outT,nvLunch);
+  document.getElementById('nv-hours-display').textContent=h;
+}
+
+function nvSaveShift(){
+  if(nvEmpIdx===null){showToast('Chọn tên bạn trước nha!');return;}
+  const inT=document.getElementById('nv-in').value;
+  const outT=document.getElementById('nv-out').value;
+  const type=document.getElementById('nv-type').value;
+  if(!inT||!outT){showToast('Nhập giờ vào và giờ ra nha!');return;}
+  const h=calcHours(inT,outT,nvLunch);
+  if(h<=0){showToast('Giờ ra phải sau giờ vào!');return;}
+
+  const today=todayStr();
+  // check trùng
+  const dup=db.shifts.find(s=>s.empIdx===nvEmpIdx&&s.date===today);
+  if(dup){
+    if(!confirm('Hôm nay bạn đã điền ca rồi. Ghi đè lên không?')) return;
+    db.shifts=db.shifts.filter(s=>!(s.empIdx===nvEmpIdx&&s.date===today));
+  }
+
+  db.shifts.push({empIdx:nvEmpIdx,date:today,inTime:inT,outTime:outT,lunch:nvLunch,type});
+  save();
+  nvRenderHistory();
+  showToast('Đã lưu ca hôm nay! ✓');
+}
+
+function nvRenderHistory(){
+  if(nvEmpIdx===null) return;
+  const emp=db.employees[nvEmpIdx];
+  const month=nowMonth();
+  const shifts=shiftsForEmpMonth(nvEmpIdx,month).sort((a,b)=>b.date.localeCompare(a.date));
+  const totals=calcEmpMonth(nvEmpIdx,month);
+
+  document.getElementById('nv-s-sessions').textContent=totals.sessions;
+  document.getElementById('nv-s-hours').textContent=totals.totalHours;
+  document.getElementById('nv-s-total').textContent=fmtShort(totals.grand);
+
+  const typeLabel={normal:'Thường',ot:'OT ×1.5',weekend:'Cuối tuần ×2'};
+  const typeClass={normal:'tag-normal',ot:'tag-ot',weekend:'tag-wk'};
+
+  const list=document.getElementById('nv-history-list');
+  if(shifts.length===0){
+    list.innerHTML='<div class="empty"><div class="empty-icon">📅</div><p>Chưa có ca nào tháng này</p></div>';
+    return;
+  }
+  list.innerHTML='<div style="padding:0 16px">'+shifts.map((s,idx)=>{
+    const h=calcHours(s.inTime,s.outTime,s.lunch);
+    const earned=calcEarned(h,emp.wage,s.type);
+    const mult=s.type==='ot'?1.5:s.type==='weekend'?2:1;
+    const realIdx=db.shifts.indexOf(s);
+    return `<div class="shift-item">
+      <div>
+        <div class="si-date">${dateLabel(s.date)}</div>
+        <div class="si-time">${s.inTime}–${s.outTime}${s.lunch?' · −1h trưa':''}</div>
+        <span class="tag ${typeClass[s.type]}" style="margin-top:4px;display:inline-block">${typeLabel[s.type]}</span>
+      </div>
+      <div class="si-right">
+        <div class="si-hrs" style="color:${s.type==='normal'?'var(--brown)':'var(--terra)'}">${h}h</div>
+        <div class="si-earn">+${fmt(earned)} đ</div>
+        <button class="btn-sm" style="margin-top:4px" onclick="openEdit(${nvEmpIdx},${realIdx})">Sửa</button>
+      </div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+// ══════════════════════════════
+//  EDIT MODAL
+// ══════════════════════════════
+let editLunch=false;
+
+function openEdit(empIdx,shiftIdx){
+  const s=db.shifts[shiftIdx];
+  if(!s) return;
+  document.getElementById('edit-emp-idx').value=empIdx;
+  document.getElementById('edit-shift-idx').value=shiftIdx;
+  document.getElementById('edit-in').value=s.inTime;
+  document.getElementById('edit-out').value=s.outTime;
+  document.getElementById('edit-type').value=s.type;
+  editLunch=!!s.lunch;
+  document.getElementById('edit-lunch-box').classList.toggle('on',editLunch);
+  editRefresh();
+  document.getElementById('overlay-edit').classList.add('show');
+}
+function editToggleLunch(){
+  editLunch=!editLunch;
+  document.getElementById('edit-lunch-box').classList.toggle('on',editLunch);
+  editRefresh();
+}
+function editRefresh(){
+  const h=calcHours(document.getElementById('edit-in').value,document.getElementById('edit-out').value,editLunch);
+  document.getElementById('edit-hours').textContent=h;
+}
+function editSave(){
+  const empIdx=parseInt(document.getElementById('edit-emp-idx').value);
+  const shiftIdx=parseInt(document.getElementById('edit-shift-idx').value);
+  const s=db.shifts[shiftIdx];
+  if(!s) return;
+  s.inTime=document.getElementById('edit-in').value;
+  s.outTime=document.getElementById('edit-out').value;
+  s.type=document.getElementById('edit-type').value;
+  s.lunch=editLunch;
+  save();
+  closeOverlay('overlay-edit');
+  nvRenderHistory();
+  qlRender();
+  showToast('Đã cập nhật ca! ✓');
+}
+function editDelete(){
+  if(!confirm('Xoá ca này?')) return;
+  const shiftIdx=parseInt(document.getElementById('edit-shift-idx').value);
+  db.shifts.splice(shiftIdx,1);
+  save();
+  closeOverlay('overlay-edit');
+  nvRenderHistory();
+  qlRender();
+  showToast('Đã xoá ca ✓');
+}
+
+// ══════════════════════════════
+//  QL: QUẢN LÝ PAGE
+// ══════════════════════════════
+function qlRender(){
+  const month=document.getElementById('ql-month').value||nowMonth();
+  document.getElementById('ql-month').value=month;
+
+  let totalShifts=0,totalGrand=0;
+  const html=db.employees.map((emp,i)=>{
+    const t=calcEmpMonth(i,month);
+    totalShifts+=t.sessions;
+    totalGrand+=t.grand;
+    const initials=emp.name.trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()||'?';
+    const ok=t.sessions>0;
+    return `<div class="m-emp-row" onclick="qlShowDetail(${i},'${month}')">
+      <div class="status-dot ${ok?'dot-ok':'dot-warn'}"></div>
+      <div class="emp-avatar" style="width:34px;height:34px;font-size:11px">${initials}</div>
+      <div class="m-emp-info">
+        <div class="m-emp-name">${emp.name}</div>
+        <div class="m-emp-meta">${t.sessions} buổi · ${t.totalHours}h · xe ${fmt(t.parking)} đ</div>
+      </div>
+      <div class="m-emp-right">
+        <div class="m-emp-total">${fmt(t.grand)} đ</div>
+        <div style="font-size:10px;color:rgba(42,33,28,.35);margin-top:2px">${fmt(emp.wage)} đ/h</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('ql-emp-list').innerHTML=html||'<div class="empty"><p>Chưa có nhân viên</p></div>';
+  document.getElementById('ql-s-emp').textContent=db.employees.length;
+  document.getElementById('ql-s-shifts').textContent=totalShifts;
+  document.getElementById('ql-s-total').textContent=fmtShort(totalGrand)+'đ';
+  qlRenderSettings();
+}
+
+function qlShowDetail(empIdx,month){
+  const emp=db.employees[empIdx];
+  const shifts=shiftsForEmpMonth(empIdx,month).sort((a,b)=>a.date.localeCompare(b.date));
+  const t=calcEmpMonth(empIdx,month);
+  const typeLabel={normal:'Thường',ot:'OT ×1.5',weekend:'Cuối tuần ×2'};
+  const typeClass={normal:'tag-normal',ot:'tag-ot',weekend:'tag-wk'};
+
+  document.getElementById('modal-title').textContent=emp.name+' · '+monthLabel(month);
+
+  let rows='';
+  if(shifts.length===0){
+    rows='<div class="empty"><div class="empty-icon">📅</div><p>Chưa có ca nào</p></div>';
+  } else {
+    rows=shifts.map(s=>{
+      const h=calcHours(s.inTime,s.outTime,s.lunch);
+      const earned=calcEarned(h,emp.wage,s.type);
+      const realIdx=db.shifts.indexOf(s);
+      return `<div class="breakdown-row">
+        <div class="br-left">
+          <div class="br-date">${dateLabel(s.date)}</div>
+          <div class="br-info">${s.inTime}–${s.outTime}${s.lunch?' · −1h trưa':''} · ${h}h</div>
+          <span class="tag ${typeClass[s.type]}" style="margin-top:3px;display:inline-block">${typeLabel[s.type]}</span>
+        </div>
+        <div class="br-right">
+          <div class="br-amt">+${fmt(earned)} đ</div>
+          <button class="btn-sm" style="margin-top:4px" onclick="closeOverlay('overlay-result');openEdit(${empIdx},${realIdx})">Sửa</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const breakdown=`
+    <div style="background:var(--cream);border-radius:9px;padding:10px 14px;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:11px;color:rgba(42,33,28,.45)">Lương giờ cơ bản</div>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:700">${fmt(t.baseWage)} đ</div>
+    </div>
+    <div style="background:var(--cream);border-radius:9px;padding:10px 14px;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:11px;color:rgba(42,33,28,.45)">Phụ cấp gửi xe (${t.sessions} buổi × ${fmt(emp.parking)} đ)</div>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:700">${fmt(t.parking)} đ</div>
+    </div>
+    <div style="background:var(--mocha);border-radius:9px;padding:12px 14px;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:11px;color:rgba(220,198,170,.5)">Tổng thực nhận</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--terra)">${fmt(t.grand)} đ</div>
+    </div>
+    <div style="margin-bottom:.75rem;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--terra)">CHI TIẾT TỪNG CA</div>
+    <div style="background:var(--white);border-radius:10px;border:1px solid rgba(42,33,28,.07);overflow:hidden;margin-bottom:1rem">${rows}</div>`;
+
+  document.getElementById('modal-body').innerHTML=breakdown;
+  document.getElementById('overlay-result').classList.add('show');
+}
+
+function qlCalcAll(){
+  const month=document.getElementById('ql-month').value||nowMonth();
+  let html='<div style="margin-bottom:1rem">';
+  db.employees.forEach((emp,i)=>{
+    const t=calcEmpMonth(i,month);
+    html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--nude)">
+      <div style="font-size:13px;font-weight:500">${emp.name}</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:var(--terra)">${fmt(t.grand)} đ</div>
+    </div>`;
+  });
+  const grandTotal=db.employees.reduce((sum,_,i)=>sum+calcEmpMonth(i,month).grand,0);
+  html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;margin-top:4px">
+    <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;color:rgba(42,33,28,.4)">TỔNG CỘNG</div>
+    <div style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--terra)">${fmt(grandTotal)} đ</div>
+  </div></div>`;
+  document.getElementById('modal-title').textContent='Bảng lương · '+monthLabel(month);
+  document.getElementById('modal-body').innerHTML=html;
+  document.getElementById('overlay-result').classList.add('show');
+}
+
+// ── CÀI ĐẶT NHÂN VIÊN ──
+function qlRenderSettings(){
+  const wrap=document.getElementById('ql-emp-settings');
+  wrap.innerHTML=db.employees.map((emp,i)=>`
+    <div style="border:1px solid var(--nude);border-radius:10px;padding:12px;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;letter-spacing:1px;color:var(--terra)">NHÂN VIÊN ${i+1}</div>
+        ${db.employees.length>1?`<button class="btn-sm danger" onclick="qlRemoveEmp(${i})">Xoá</button>`:''}
+      </div>
+      <div class="f-row" style="margin-bottom:8px">
+        <div><div class="f-label">Tên</div><input class="f-input" id="emp-name-${i}" value="${emp.name}" style="font-size:12px;padding:8px 10px"></div>
+        <div><div class="f-label">Lương/giờ (đ)</div><input type="number" class="f-input" id="emp-wage-${i}" value="${emp.wage}" style="font-size:12px;padding:8px 10px"></div>
+      </div>
+      <div><div class="f-label">Phụ cấp xe/buổi (đ)</div><input type="number" class="f-input" id="emp-parking-${i}" value="${emp.parking}" style="font-size:12px;padding:8px 10px"></div>
+    </div>`).join('');
+}
+function qlSaveSettings(){
+  db.employees=db.employees.map((emp,i)=>({
+    name:document.getElementById('emp-name-'+i).value||emp.name,
+    wage:parseFloat(document.getElementById('emp-wage-'+i).value)||emp.wage,
+    parking:parseFloat(document.getElementById('emp-parking-'+i).value)||emp.parking,
+  }));
+  save();
+  nvRenderEmpList();
+  qlRender();
+  showToast('Đã lưu cài đặt! ✓');
+}
+function qlAddEmpField(){
+  if(db.employees.length>=6){showToast('Tối đa 6 nhân viên');return;}
+  db.employees.push({name:'Nhân viên '+(db.employees.length+1),wage:25000,parking:5000});
+  save();
+  qlRenderSettings();
+  nvRenderEmpList();
+  showToast('Đã thêm nhân viên!');
+}
+function qlRemoveEmp(i){
+  if(!confirm('Xoá nhân viên này? Ca làm của họ cũng bị xoá.')) return;
+  db.shifts=db.shifts.filter(s=>s.empIdx!==i).map(s=>({...s,empIdx:s.empIdx>i?s.empIdx-1:s.empIdx}));
+  db.employees.splice(i,1);
+  save();
+  qlRender();
+  nvRenderEmpList();
+  if(nvEmpIdx===i){nvEmpIdx=null;document.getElementById('nv-form-wrap').style.display='none';}
+  else if(nvEmpIdx>i) nvEmpIdx--;
+  showToast('Đã xoá nhân viên');
+}
+
+// ══════════════════════════════
+//  INIT
+// ══════════════════════════════
+load();
+document.getElementById('ql-month').value=nowMonth();
+nvRenderEmpList();
+qlRender();
 </script>
 </body>
 </html>
